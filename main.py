@@ -1,8 +1,6 @@
 import requests
 import random
-
-
-
+from time import time
 
 
 print("""
@@ -20,14 +18,14 @@ print("""
 
 choice = input("1/2/3:")
 
-
+#入れないから最初にはいっておいて
 if choice == "1":
-   link = input("link:")
    with open('tokens.txt', 'r') as f:
       token = f.readlines()
    for i in token:
-     apilink = "https://discord.com/api/v9/invite/" + link
-     headers={'Authorization': i}
+     link = input("link:")
+     apilink = "https://discordapp.com/api/v9/invites/" + link
+     headers={'authorization': i}
      bot_invite = requests.post(apilink, headers=headers)
 
 if choice == "2":
@@ -48,8 +46,8 @@ if choice == "3":
   for i in token:
     for a in channel:
       for u in content:
-        for nu in range(3):
+        for nu in range(30):
             url = 'https://discord.com/api/v9/channels/'+a+'/messages'
-            data = {"content": f"{nu}回目のメッセージ:{u}"}
+            data = {"content": f"{u} {random.choice(range(1000,99999))}"}
             header = {"authorization": i}
             r = requests.post(url, data=data, headers=header)
