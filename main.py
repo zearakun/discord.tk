@@ -39,7 +39,7 @@ if choice == "2":
     requests.delete(f"https://discord.com/api/v9/users/@me/guilds/{guild}",headers=headers)
 
 if choice == "3":
-  with open('tokens.txt', 'r') as f:
+  with open('token.txt', 'r') as f:
       token = f.readlines()
   with open('channel.txt', 'r') as f:
       channel = f.readlines()
@@ -48,8 +48,14 @@ if choice == "3":
   for i in token:
     for a in channel:
       for u in content:
-        for nu in range(20):
+        for nu in range(3):
             url = 'https://discord.com/api/v9/channels/'+a+'/messages'
-            data = {"content": f"{nu}.{u} #ditoloはこの活動を支援しています {random.choice(range(1000,99999))}"}
+            en = ["a","b","c","d","i","e","f","g","h","i","j","k","n","m","l","o","p","q","r","s","","t","u","v","w","s","y","g"]
+            enran = f"{random.choice(en)}{random.choice(en)}{random.choice(en)}"
+            data = {"content": f"{u} #ditoloはこの活動を支援しています {random.choice(range(0,99999))}{enran}"}
             header = {"authorization": i}
             r = requests.post(url, data=data, headers=header)
+            if r.status_code == 200:
+              print(f"{nu}:行けたよ|{i}|")
+            if r.status_code == 400:
+              print("失敗...")
