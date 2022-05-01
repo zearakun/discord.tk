@@ -13,7 +13,7 @@ print("""
 [2]送信
 """)
 
-choice = input("1/2/3:")
+choice = input("1/2:")
 
 
 
