@@ -9,16 +9,15 @@ print("""
 ██║░░██║██║░░░██║░░░██║░░██║██║░░░░░██║░░██║  ██╔══██╗██╔══██║██║██║░░██║██╔══╝░░██╔══██╗
 ██████╔╝██║░░░██║░░░╚█████╔╝███████╗╚█████╔╝  ██║░░██║██║░░██║██║██████╔╝███████╗██║░░██║
 ╚═════╝░╚═╝░░░╚═╝░░░░╚════╝░╚══════╝░╚════╝░  ╚═╝░░╚═╝╚═╝░░╚═╝╚═╝╚═════╝░╚══════╝╚═╝░░╚═╝
-[1]入る
-[2]抜ける
-[3]送信
+[1]抜ける
+[2]送信
 """)
 
 choice = input("1/2/3:")
 
 
 
-if choice == "2":
+if choice == "1":
   guild = input("guildid:")
   with open('tokens.txt', 'r') as f:
       token = f.read().splitlines()
@@ -26,7 +25,7 @@ if choice == "2":
     headers={'authorization': i}
     requests.delete(f"https://discord.com/api/v9/users/@me/guilds/{guild}",headers=headers)
 
-if choice == "3":
+if choice == "2":
   with open('tokens.txt', 'r') as f:
       token = f.read().splitlines()
   with open('channel.txt', 'r') as f:
