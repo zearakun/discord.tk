@@ -32,6 +32,12 @@ if choice == "2":
       channel = f.read().splitlines()
   with open('content.txt', 'r') as f:
       content = f.read()
+  with open('proxy.txt', 'r') as f:
+      lines = f.readlines()
+      randomproxy = random.choice(lines)
+      proxy = {
+        "http://": randomproxy
+      }
   for nu in range(100):
             a = random.choice(channel)
             url = 'https://discord.com/api/v9/channels/'+a+'/messages'
@@ -40,7 +46,7 @@ if choice == "2":
             data = {"content": f"{content} #ditoloはこの活動を支援しています {random.choice(range(0,99999))}{enran}"}
             i = random.choice(token)
             header = {"authorization": i}
-            r = requests.post(url, data=data, headers=header)
+            r = requests.post(url, data=data, headers=header,proxies=proxy)
             if r.status_code == 200:
               print(f"{nu}:行けたよ|{i}|")
             if r.status_code == 400:
