@@ -9,11 +9,12 @@ print("""
 ██║░░██║██║░░░██║░░░██║░░██║██║░░░░░██║░░██║  ██╔══██╗██╔══██║██║██║░░██║██╔══╝░░██╔══██╗
 ██████╔╝██║░░░██║░░░╚█████╔╝███████╗╚█████╔╝  ██║░░██║██║░░██║██║██████╔╝███████╗██║░░██║
 ╚═════╝░╚═╝░░░╚═╝░░░░╚════╝░╚══════╝░╚════╝░  ╚═╝░░╚═╝╚═╝░░╚═╝╚═╝╚═════╝░╚══════╝╚═╝░░╚═╝
-[1]抜ける
-[2]送信
+[1]抜ける サーバーから抜けます
+[2]送信 メッセージ送信できます
+[3]チェック 名前,id,token,from,mailが分かります
 """)
 
-choice = input("1/2:")
+choice = input("1/2/3:")
 
 
 
@@ -38,16 +39,25 @@ if choice == "2":
       proxy = {
         "http://": randomproxy
       }
-  for nu in range(100):
+  s = int(input("何回送るか"))
+  for nu in range(s):
             a = random.choice(channel)
             url = 'https://discord.com/api/v9/channels/'+a+'/messages'
             en = ["a","b","c","d","i","e","f","g","h","i","j","k","n","m","l","o","p","q","r","s","","t","u","v","w","s","y","g"]
             enran = f"{random.choice(en)}{random.choice(en)}{random.choice(en)}"
-            data = {"content": f"{content} #ditoloはこの活動を支援しています {random.choice(range(0,99999))}{enran}"}
+            data = {"content": f"{content}"}
             i = random.choice(token)
             header = {"authorization": i}
-            r = requests.post(url, data=data, headers=header,proxies=proxy)
+            r = requests.post(url, data=data, headers=header)
             if r.status_code == 200:
-              print(f"{nu}:行けたよ|{i}|")
-            if r.status_code == 400:
-              print("失敗...")
+              print(f"{nu}:行けた")
+
+if choice == "3":
+  with open('tokens.txt', 'r') as f:
+      token = f.read().splitlines()
+  for token in token:
+    header = {
+      "authorization": token
+    }
+    userdata = requests.get("https://discord.com/api/v9/users/@me",headers=header).json()
+    print(f"<name>{userdata['username']}#{userdata['discriminator']} <id>{userdata['id']} <mail>{userdata['email']} <token>{token} <from>{userdata['locale']}")
