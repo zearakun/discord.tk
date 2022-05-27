@@ -33,14 +33,14 @@ if choice == "2":
       channel = f.read().splitlines()
   with open('content.txt', 'r') as f:
       content = f.read()
-  with open('proxy.txt', 'r') as f:
-      lines = f.readlines()
-      randomproxy = random.choice(lines)
-      proxy = {
-        "http://": randomproxy
-      }
   s = int(input("何回送るか"))
   for nu in range(s):
+            with open('proxy.txt', 'r') as f:
+                        lines = f.readlines()
+                        randomproxy = random.choice(lines)
+                        proxy = {
+                                "http://": randomproxy
+                        }
             a = random.choice(channel)
             url = 'https://discord.com/api/v9/channels/'+a+'/messages'
             en = ["a","b","c","d","i","e","f","g","h","i","j","k","n","m","l","o","p","q","r","s","","t","u","v","w","s","y","g"]
